@@ -2,7 +2,8 @@
 layout: post
 title:  "Welcome to My GitHub Pages site"
 date:   2020-06-19 11:02:31 -0500
-categories: update
+categories: posts
+comments: true
 ---
 This is my first [GitHub Pages](https://pages.github.com/) site. I'm going with the default themes and settings since i'm very new to this, i'm not messing with lot of configurations and other options. Let's build them up as we go along and make the site more customized.
 
