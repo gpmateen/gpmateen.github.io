@@ -12,13 +12,50 @@ If you want to read more about the tutorial itself, then head over to [django tu
 <br>
 <hr>
 <br>
-However in this post I wanted to highlight [`load.py`](https://github.com/gpmateen/django-tutorials/blob/master/load.py) which is created to load the initial data in the database, once the migration is complete. We run this script to load data into the database, the very first thing this script does, is to set environment variable `DJANGO_SETTINGS_MODULE` and call `django.setup()`, which gives us the window into application specific modules / utilities. 
+However in this post I wanted to highlight [`load.py`](https://github.com/gpmateen/django-tutorials/blob/master/load.py) which is created to load the initial data in the database, once the migration is complete. We run this script to load data into the database.
+
+```python
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'django_tutorials.settings'
+
+import django
+django.setup()
+
+from polls.models import *
+import csv
+
+from django.utils import timezone
+import pytz
+
+print('loading data into question/choice model')
+with open('data/questions.csv') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        q = Question.objects.get_or_create(question_text=row[0], pub_date=timezone.now())
+        
+        # load all the choices
+        for choice in row[1:]:
+            c = Choice.objects.get_or_create(question=q[0], choice_text=choice, votes=0)
+```
+
+The very first thing this script does, is to set environment variable `DJANGO_SETTINGS_MODULE` and call `django.setup()`, which gives us the window into application specific modules / utilities. 
+
+```python
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'django_tutorials.settings'
+
+import django
+django.setup()
+```
 
 This is exactly what `python manage.py shell` command would do.
 
 Next we import the models which needs to be loaded with initial data. 
 
-`from polls.models import *`
+```python
+from polls.models import *
+import csv
+```
 
 I would like to use `*` as supposed to using the name of the models specifically to relieve you of the frustration to add them in there when new models gets added. Next we read the data file (`csv`) which will get loaded into the models.
 
