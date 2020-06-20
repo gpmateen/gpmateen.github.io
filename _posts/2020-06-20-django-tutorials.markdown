@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django Tutorials"
-date:   2020-06-19 11:02:31 -0500
+date:   2020-06-20 11:02:31 -0500
 categories: posts
 ---
 This post covers the incremental additions to the [django-tutorials](https://github.com/gpmateen/django-tutorials) repository. Added a new application to the project called `polls` which is based off of [django tutorial](https://docs.djangoproject.com/en/3.0/intro/tutorial01/). In order to keep the UI interesting i'm using [materialize css](https://materializecss.com/) and its currently hosted on [pythonanywhere](http://gpmateen.pythonanywhere.com/).
