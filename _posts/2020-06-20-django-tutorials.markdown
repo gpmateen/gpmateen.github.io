@@ -42,4 +42,4 @@ for choice in row[1:]:
 
 This gives us the flexibility of adding as many choices as you can, there could be as little as one or as many as 10 or more choices. With that if you head over to the application, you'll see some initial poll questions loaded as supposed to blank page. Also this saves us time to add the poll questions manually through django admin.
 
-Thanks for following along, we'll see in the next post.
+Thanks for following along, we'll see you in the next post.
