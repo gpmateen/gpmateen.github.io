@@ -31,11 +31,17 @@ print('loading data into question/choice model')
 with open('data/questions.csv') as f:
     reader = csv.reader(f)
     for row in reader:
-        q = Question.objects.get_or_create(question_text=row[0], pub_date=timezone.now())
+        q = Question.objects.get_or_create(
+            question_text=row[0], pub_date=timezone.now()
+        )
         
         # load all the choices
         for choice in row[1:]:
-            c = Choice.objects.get_or_create(question=q[0], choice_text=choice, votes=0)
+            c = Choice.objects.get_or_create(
+                question=q[0], 
+                choice_text=choice, 
+                votes=0
+            )
 ```
 
 The very first thing this script does, is to set environment variable `DJANGO_SETTINGS_MODULE` and call `django.setup()`, which gives us the window into application specific modules / utilities. 
@@ -67,14 +73,21 @@ I've created a `csv` file for this process, let's read it and start creating obj
 with open('data/questions.csv') as f:
     reader = csv.reader(f)
     for row in reader:
-        q = Question.objects.get_or_create(row[0], timezone.now())
+        q = Question.objects.get_or_create(
+            row[0],
+            timezone.now()
+        )
 ```
 
 Now let's load the appropriate choices for the given poll question, if you look at the `data/questions.csv`, you'll see that poll answers are place after the question itself. So let's slice the rows and read all the choices.
 
 ```python
 for choice in row[1:]:
-    c = Choice.objects.get_or_create(question=q[0], choice_text=choice, votes=0)
+    c = Choice.objects.get_or_create(
+        question=q[0], 
+        choice_text=choice, 
+        votes=0
+    )
 ```
 
 This gives us the flexibility of adding as many choices as you can, there could be as little as one or as many as 10 or more choices. With that if you head over to the application, you'll see some initial poll questions loaded as supposed to blank page. Also this saves us time to add the poll questions manually through django admin.
